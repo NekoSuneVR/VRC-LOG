@@ -14,16 +14,16 @@ const USER_AGENT: &str = concat!(
     " shaybox@shaybox.com"
 );
 
-pub struct VRCDB {
+pub struct NEKODB {
     client: Client,
     userid: String,
 }
 
-impl VRCDB {
+impl NEKODB {
     #[must_use]
     pub const fn new(client: Client, userid: String) -> Self {
-        // TODO: Print VRCDB Statistics
-        // Waiting on VRCDB Leaderboard
+        // TODO: Print NEKODB Statistics
+        // Waiting on NEKODB Leaderboard
 
         Self { client, userid }
     }
@@ -33,25 +33,25 @@ impl VRCDB {
         eprintln!("This may be due to one of the following reasons:");
         eprintln!("1. Discord is not running on your system.");
         eprintln!("2. VRC-LOG was restarted too quickly.\n");
-        eprintln!("The User ID will default to the developer: ShayBox");
+        eprintln!("The User ID will default to the developer: NekoSuneVR");
 
         std::env::var("DISCORD").unwrap_or_else(|_| DEVELOPER_ID.to_owned())
     }
 }
 
-impl Default for VRCDB {
+impl Default for NEKODB {
     fn default() -> Self {
         let client = Client::default();
         let userid = USER.clone().map_or_else(Self::default, |user| {
             let userid = user.id.unwrap_or_else(Self::default);
-            if userid == "1045800378228281345" {
+            if userid == "100463282099326976" {
                 eprintln!("Vesktop & arRPC do not support fetching user info.");
-                eprintln!("The User ID will default to the developer: ShayBox");
+                eprintln!("The User ID will default to the developer: NekoSuneVR");
 
                 std::env::var("DISCORD").unwrap_or_else(|_| DEVELOPER_ID.to_owned())
             } else {
                 if let Some(username) = user.username {
-                    println!("[{}] Authenticated as {username}", Type::VRCDB);
+                    println!("[{}] Authenticated as {username}", Type::NEKODB);
                 }
 
                 userid
@@ -62,7 +62,7 @@ impl Default for VRCDB {
     }
 }
 
-impl Provider for VRCDB {
+impl Provider for NEKODB {
     fn check_avatar_id(&self, _avatar_id: &str) -> Result<bool> {
         bail!("Unsupported")
     }
@@ -70,7 +70,7 @@ impl Provider for VRCDB {
     fn send_avatar_id(&self, avatar_id: &str) -> Result<bool> {
         let status = self
             .client
-            .put("https://search.bs002.de/api/Avatar/putavatar")
+            .post("https://avtr.nekosunevr.co.uk/v1/vrchat/avatarapi/putavatarExternal")
             .header("User-Agent", USER_AGENT)
             .json(&HashMap::from([
                 ("id", avatar_id),
@@ -80,7 +80,7 @@ impl Provider for VRCDB {
             .status();
 
         if status == 429 {
-            println!("[{}] 429 Rate Limit, Please Wait 1 Minute...", Type::VRCDB);
+            println!("[{}] 429 Rate Limit, Please Wait 1 Minute...", Type::NEKODB);
             std::thread::sleep(Duration::from_secs(60));
             self.send_avatar_id(avatar_id)
         } else {
