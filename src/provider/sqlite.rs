@@ -15,7 +15,7 @@ impl Sqlite {
     ///
     /// Will return `Err` if `sqlite::open` errors
     pub fn new() -> Result<Self> {
-        let path = VRCHAT_PATH.join("avatars.sqlite");
+        let path = VRCHAT_PATH.join("avatars-neko.sqlite");
         let connection = sqlite::open(path)?;
 
         // Create the table if it doesn't exist
