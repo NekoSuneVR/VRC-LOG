@@ -112,8 +112,10 @@ pub fn process_avatars((_tx, rx, _): WatchResponse) -> anyhow::Result<()> {
     let mut providers = Providers::from([
         #[cfg(all(feature = "cache", feature = "sqlite"))]
         (Type::Cache, box_db!(Sqlite::new()?)),
-        #[cfg(feature = "vrcdb")]
-        (Type::VRCDB, box_db!(VRCDB::default())),
+        #[cfg(feature = "jeffdb")]
+        (Type::JEFFDB, box_db!(JEFFDB::default())),
+        #[cfg(feature = "coffeedb")]
+        (Type::COFFEEDB, box_db!(COFFEEDB::default())),
         #[cfg(feature = "nekodb")]
         (Type::NEKODB, box_db!(NEKODB::default())),
         #[cfg(all(feature = "sqlite", not(feature = "cache")))]

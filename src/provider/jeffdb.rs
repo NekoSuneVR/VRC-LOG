@@ -14,16 +14,16 @@ const USER_AGENT: &str = concat!(
     " shaybox@shaybox.com"
 );
 
-pub struct VRCDB {
+pub struct JEFFDB {
     client: Client,
     userid: String,
 }
 
-impl VRCDB {
+impl JEFFDB {
     #[must_use]
     pub const fn new(client: Client, userid: String) -> Self {
-        // TODO: Print VRCDB Statistics
-        // Waiting on VRCDB Leaderboard
+        // TODO: Print JEFFDB Statistics
+        // Waiting on JEFFDB Leaderboard
 
         Self { client, userid }
     }
@@ -39,7 +39,7 @@ impl VRCDB {
     }
 }
 
-impl Default for VRCDB {
+impl Default for JEFFDB {
     fn default() -> Self {
         let client = Client::default();
         let userid = USER.clone().map_or_else(Self::default, |user| {
@@ -51,7 +51,7 @@ impl Default for VRCDB {
                 std::env::var("DISCORD").unwrap_or_else(|_| DEVELOPER_ID.to_owned())
             } else {
                 if let Some(username) = user.username {
-                    println!("[{}] Authenticated as {username}", Type::VRCDB);
+                    println!("[{}] Authenticated as {username}", Type::JEFFDB);
                 }
 
                 userid
@@ -62,7 +62,7 @@ impl Default for VRCDB {
     }
 }
 
-impl Provider for VRCDB {
+impl Provider for JEFFDB {
     fn check_avatar_id(&self, _avatar_id: &str) -> Result<bool> {
         bail!("Unsupported")
     }
@@ -70,7 +70,7 @@ impl Provider for VRCDB {
     fn send_avatar_id(&self, avatar_id: &str) -> Result<bool> {
         let status = self
             .client
-            .put("https://search.bs002.de/api/Avatar/putavatar")
+            .put("https://avtr.frensmp.cc/v1/vrchat/avatarapi/putavatarExternal")
             .header("User-Agent", USER_AGENT)
             .json(&HashMap::from([
                 ("id", avatar_id),
@@ -80,7 +80,7 @@ impl Provider for VRCDB {
             .status();
 
         if status == 429 {
-            println!("[{}] 429 Rate Limit, Please Wait 1 Minute...", Type::VRCDB);
+            println!("[{}] 429 Rate Limit, Please Wait 1 Minute...", Type::JEFFDB);
             std::thread::sleep(Duration::from_secs(60));
             self.send_avatar_id(avatar_id)
         } else {

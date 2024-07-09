@@ -5,8 +5,10 @@ use strum::Display;
 pub mod prelude;
 #[cfg(feature = "sqlite")]
 pub mod sqlite;
-#[cfg(feature = "vrcdb")]
-pub mod vrcdb;
+#[cfg(feature = "jeffdb")]
+pub mod jeffdb;
+#[cfg(feature = "coffeedb")]
+pub mod coffeedb;
 #[cfg(feature = "nekodb")]
 pub mod nekodb;
 
@@ -16,9 +18,12 @@ pub enum Type {
     Cache,
     #[cfg(feature = "sqlite")]
     Sqlite,
-    #[cfg(feature = "vrcdb")]
+    #[cfg(feature = "jeffdb")]
     #[strum(to_string = "Avatar Search")]
-    VRCDB,
+    JEFFDB,
+    #[cfg(feature = "coffeedb")]
+    #[strum(to_string = "Avatar Search")]
+    COFFEEDB,
     #[cfg(feature = "nekodb")]
     #[strum(to_string = "Avatar Search")]
     NEKODB,
