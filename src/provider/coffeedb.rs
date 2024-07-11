@@ -70,7 +70,7 @@ impl Provider for COFFEEDB {
     fn send_avatar_id(&self, avatar_id: &str) -> Result<bool> {
         let status = self
             .client
-            .put("https://avtr1.nekosunevr.co.uk/v1/vrchat/avatarapi/putavatarExternal")
+            .put("https://avtr1.nekosunevr.co.uk/v1/vrchat/avatars/store/putavatarExternal")
             .header("User-Agent", USER_AGENT)
             .json(&HashMap::from([
                 ("id", avatar_id),

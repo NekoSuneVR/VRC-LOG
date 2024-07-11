@@ -70,7 +70,7 @@ impl Provider for NEKODB {
     fn send_avatar_id(&self, avatar_id: &str) -> Result<bool> {
         let status = self
             .client
-            .post("https://avtr.nekosunevr.co.uk/v1/vrchat/avatarapi/putavatarExternal")
+            .post("https://avtr.nekosunevr.co.uk/v1/vrchat/avatars/store/putavatarExternal")
             .header("User-Agent", USER_AGENT)
             .json(&HashMap::from([
                 ("id", avatar_id),

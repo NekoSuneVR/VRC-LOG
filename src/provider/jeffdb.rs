@@ -70,7 +70,7 @@ impl Provider for JEFFDB {
     fn send_avatar_id(&self, avatar_id: &str) -> Result<bool> {
         let status = self
             .client
-            .put("https://avtr.frensmp.cc/v1/vrchat/avatarapi/putavatarExternal")
+            .put("https://avtr.frensmp.cc/v1/vrchat/avatars/store/putavatarExternal")
             .header("User-Agent", USER_AGENT)
             .json(&HashMap::from([
                 ("id", avatar_id),
