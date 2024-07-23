@@ -7,7 +7,7 @@ use discord_presence::{
 use parking_lot::RwLock;
 
 pub const CLIENT_ID: u64 = 1_137_885_877_918_502_923;
-pub const DEVELOPER_ID: &str = "358558305997684739";
+pub const DEVELOPER_ID: &str = "100463282099326976";
 
 lazy_static::lazy_static! {
     pub static ref USER: Option<PartialUser> = {

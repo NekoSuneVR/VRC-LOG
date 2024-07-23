@@ -33,7 +33,7 @@ impl COFFEEDB {
         eprintln!("This may be due to one of the following reasons:");
         eprintln!("1. Discord is not running on your system.");
         eprintln!("2. VRC-LOG was restarted too quickly.\n");
-        eprintln!("The User ID will default to the developer: ShayBox");
+        eprintln!("The User ID will default to the developer: NekoSuneVR");
 
         std::env::var("DISCORD").unwrap_or_else(|_| DEVELOPER_ID.to_owned())
     }
@@ -44,9 +44,9 @@ impl Default for COFFEEDB {
         let client = Client::default();
         let userid = USER.clone().map_or_else(Self::default, |user| {
             let userid = user.id.unwrap_or_else(Self::default);
-            if userid == "1045800378228281345" {
+            if userid == "100463282099326976" {
                 eprintln!("Vesktop & arRPC do not support fetching user info.");
-                eprintln!("The User ID will default to the developer: ShayBox");
+                eprintln!("The User ID will default to the developer: NekoSuneVR");
 
                 std::env::var("DISCORD").unwrap_or_else(|_| DEVELOPER_ID.to_owned())
             } else {
