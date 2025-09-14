@@ -4,8 +4,8 @@ pub use super::avtrdb::AvtrDB;
 pub use super::cache::Cache;
 #[cfg(feature = "vrcdb")]
 pub use super::vrcdb::VrcDB;
-#[cfg(feature = "vrcds")]
-pub use super::vrcds::VrcDS;
+#[cfg(feature = "nsvr")]
+pub use super::nsvr::Nsvr;
 #[cfg(feature = "vrcwb")]
 pub use super::vrcwb::VrcWB;
 #[cfg(feature = "paw")]
