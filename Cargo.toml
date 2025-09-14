@@ -47,13 +47,13 @@ windows = { version = "0.61", features = [
 ] }
 
 [features]
-default = ["cache", "avtrdb", "vrcdb", "vrcds", "vrcwb", "paw", "title", "rustls-tls"]
+default = ["cache", "avtrdb", "vrcdb", "nsvr", "vrcwb", "paw", "title", "rustls-tls"]
 
 # VRChat Avatar Database Providers
 cache = ["dep:tokio-rusqlite-new"]
 avtrdb = ["dep:reqwest", "discord"]
 vrcdb = ["dep:reqwest", "discord"]
-vrcds = ["dep:reqwest", "discord"]
+nsvr = ["dep:reqwest", "discord"]
 vrcwb = ["dep:reqwest", "discord"]
 paw = ["dep:reqwest"]
 
