@@ -13,12 +13,12 @@ use crate::{
 
 const URL: &str = "https://avtr.nekosunevr.co.uk/v1/vrchat/avatars/store/putavatarExternal";
 
-pub struct VrcDS<'a> {
+pub struct Nsvr<'a> {
     settings: &'a Settings,
     client:   Client,
 }
 
-impl<'a> VrcDS<'a> {
+impl<'a> Nsvr<'a> {
     #[must_use]
     pub fn new(settings: &'a Settings) -> Self {
         Self {
@@ -29,9 +29,9 @@ impl<'a> VrcDS<'a> {
 }
 
 #[async_trait]
-impl Provider for VrcDS<'_> {
+impl Provider for Nsvr<'_> {
     fn kind(&self) -> ProviderKind {
-        ProviderKind::VRCDS
+        ProviderKind::NSVR
     }
 
     async fn check_avatar_id(&self, _avatar_id: &str) -> Result<bool> {
